@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#081b1f" />
+  <title>MealWise — Smart family meal planning</title>
+  <meta name="description" content="MealWise creates practical family meal plans around your location, cuisine, budget, allergies, time and kitchen setup." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="MealWise home">
+      <span class="brand-mark">M</span>
+      <span>
+        <strong>MealWise</strong>
+        <small>AI Family Meal Planner</small>
+      </span>
+    </a>
+    <button id="resetBtn" class="ghost-btn" type="button">Reset</button>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div class="badge">Smart meals. Local ingredients. Real budgets.</div>
+      <h1>What should we cook <span>this week?</span></h1>
+      <p>Tell MealWise about your family, budget, allergies and kitchen. We’ll turn it into a practical weekly meal plan.</p>
+      <div class="hero-pills">
+        <span>📍 Location-aware</span>
+        <span>💰 Budget-aware</span>
+        <span>🛡️ Allergy-aware</span>
+        <span>⏱️ Time-aware</span>
+      </div>
+    </section>
+
+    <section class="app-grid">
+      <form id="plannerForm" class="panel form-panel">
+        <div class="panel-heading">
+          <div>
+            <span class="eyebrow">STEP 1</span>
+            <h2>Tell us about your household</h2>
+          </div>
+          <span class="status-dot">Free demo mode</span>
+        </div>
+
+        <div class="field-grid">
+          <label class="field">
+            <span>Where do you live?</span>
+            <input id="location" name="location" value="Hong Kong" placeholder="e.g. Hong Kong" required />
+          </label>
+
+          <label class="field">
+            <span>Preferred cuisine</span>
+            <select id="cuisine" name="cuisine">
+              <option value="Filipino" selected>Filipino</option>
+              <option value="Chinese">Chinese</option>
+              <option value="Western">Western</option>
+              <option value="Mixed">Mixed / flexible</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Adults</span>
+            <input id="adults" name="adults" type="number" min="1" max="20" value="2" required />
+          </label>
+
+          <label class="field">
+            <span>Children</span>
+            <input id="children" name="children" type="number" min="0" max="20" value="2" />
+          </label>
+
+          <label class="field field-wide">
+            <span>Children's ages</span>
+            <input id="childAges" name="childAges" value="6 years, 1 year" placeholder="e.g. 6 years, 1 year" />
+            <small>Useful for portion and safety considerations.</small>
+          </label>
+
+          <label class="field field-wide">
+            <span>Allergies / foods to avoid</span>
+            <textarea id="allergies" name="allergies" rows="3" placeholder="e.g. 1-year-old: chicken, seafood, egg">1-year-old: chicken, seafood, egg</textarea>
+            <small>MealWise will flag restrictions clearly. Always verify packaged-food labels and cross-contact risks.</small>
+          </label>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="panel-heading compact">
+          <div>
+            <span class="eyebrow">STEP 2</span>
+            <h2>Set the plan</h2>
+          </div>
+        </div>
+
+        <div class="field-grid">
+          <label class="field">
+            <span>Weekly food budget</span>
+            <div class="money-input">
+              <select id="currency" name="currency" aria-label="Currency">
+                <option value="HKD" selected>HKD</option>
+                <option value="PHP">PHP</option>
+                <option value="USD">USD</option>
+              </select>
+              <input id="budget" name="budget" type="number" min="1" value="400" required />
+            </div>
+          </label>
+
+          <label class="field">
+            <span>Maximum cooking time</span>
+            <select id="cookTime" name="cookTime">
+              <option value="20">20 minutes</option>
+              <option value="30" selected>30 minutes</option>
+              <option value="40">40 minutes</option>
+              <option value="60">60 minutes</option>
+            </select>
+          </label>
+
+          <label class="field field-wide">
+            <span>Meals to plan</span>
+            <div class="choice-row">
+              <label class="check"><input type="checkbox" name="meals" value="breakfast"><span>Breakfast</span></label>
+              <label class="check"><input type="checkbox" name="meals" value="lunch" checked><span>Lunch</span></label>
+              <label class="check"><input type="checkbox" name="meals" value="dinner" checked><span>Dinner</span></label>
+            </div>
+          </label>
+
+          <label class="field field-wide">
+            <span>Where do you usually shop?</span>
+            <input id="shops" name="shops" value="Wet market and local shops" placeholder="Wet market, supermarket, local shops..." />
+          </label>
+
+          <label class="field field-wide">
+            <span>Kitchen equipment</span>
+            <div class="choice-row">
+              <label class="check"><input type="checkbox" name="equipment" value="Stove" checked><span>Stove</span></label>
+              <label class="check"><input type="checkbox" name="equipment" value="Air fryer" checked><span>Air fryer</span></label>
+              <label class="check"><input type="checkbox" name="equipment" value="Oven"><span>Oven</span></label>
+              <label class="check"><input type="checkbox" name="equipment" value="Rice cooker"><span>Rice cooker</span></label>
+            </div>
+          </label>
+
+          <label class="toggle-row field-wide">
+            <span>
+              <strong>Leftovers are okay</strong>
+              <small>Reuse dinner portions to reduce cost and prep time.</small>
+            </span>
+            <input id="leftovers" type="checkbox" checked />
+          </label>
+        </div>
+
+        <button class="primary-btn" type="submit">
+          <span>✨</span> Create my 7-day plan
+        </button>
+        <p class="microcopy">This first MVP uses an offline demo meal library, so generating a plan costs nothing. AI generation comes in the next build.</p>
+      </form>
+
+      <aside class="panel preview-panel">
+        <div class="panel-heading">
+          <div>
+            <span class="eyebrow">MEALWISE SNAPSHOT</span>
+            <h2>Your plan at a glance</h2>
+          </div>
+        </div>
+        <div id="profilePreview" class="profile-preview"></div>
+        <div class="callout">
+          <div class="callout-icon">🧠</div>
+          <div>
+            <strong>How the future AI version will think</strong>
+            <p>Location → household → cuisine → restrictions → budget → cooking time → equipment → leftovers.</p>
+          </div>
+        </div>
+        <div class="safety-note">
+          <strong>Food allergy note</strong>
+          <p>MealWise can help with planning, but it cannot guarantee an ingredient is allergen-free. Check labels and preparation surfaces, especially for young children.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section id="results" class="results hidden" aria-live="polite">
+      <div class="results-header">
+        <div>
+          <span class="eyebrow">YOUR 7-DAY PLAN</span>
+          <h2 id="resultsTitle">This week’s MealWise plan</h2>
+          <p id="resultsMeta"></p>
+        </div>
+        <button id="printBtn" class="ghost-btn" type="button">Print / Save PDF</button>
+      </div>
+
+      <div id="warningBox" class="warning-box hidden"></div>
+      <div id="mealPlan" class="meal-plan"></div>
+
+      <div class="results-grid">
+        <section class="panel mini-panel">
+          <span class="eyebrow">GROCERY GUIDE</span>
+          <h3>What to buy</h3>
+          <div id="groceryList" class="grocery-list"></div>
+        </section>
+        <section class="panel mini-panel">
+          <span class="eyebrow">BUDGET CHECK</span>
+          <h3>Estimated spending</h3>
+          <div id="budgetSummary"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>MealWise</strong> <span>•</span> Made for real households, not perfect kitchens.
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

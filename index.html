@@ -52,13 +52,14 @@
         <div class="field-grid">
           <label class="field">
             <span>Where do you live?</span>
-            <input id="location" name="location" value="Hong Kong" placeholder="e.g. Hong Kong" required />
+            <input id="location" name="location" placeholder="e.g. Hong Kong" required />
           </label>
 
           <label class="field">
             <span>Preferred cuisine</span>
             <select id="cuisine" name="cuisine">
-              <option value="Filipino" selected>Filipino</option>
+             <option value="" selected disabled>Select cuisine</option>
+<option value="Filipino">Filipino</option>
               <option value="Chinese">Chinese</option>
               <option value="Western">Western</option>
               <option value="Mixed">Mixed / flexible</option>
@@ -72,7 +73,7 @@
 
           <label class="field">
             <span>Children</span>
-            <input id="children" name="children" type="number" min="0" max="20" value="2" />
+            <input id="children" name="children" type="number" min="0" max="20" value="0" />
           </label>
 
           <label class="field field-wide">
